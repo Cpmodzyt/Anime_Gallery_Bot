@@ -1,9 +1,7 @@
 from telethon import events, Button
 from API.Kissmangaapi import kissmangaapi as kiss
 import Helper.formating_results as format
-from config import initialize
-
-bot, gogo = initialize()
+from config import bot, gogo
 
 from Helper.helper_functions import *
 import os
