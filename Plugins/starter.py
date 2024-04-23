@@ -1,5 +1,5 @@
 from Helper.helper import start_text, help_text
-from config import bot, gogo
+from config import bot, gogo, bot_username
 from telethon import events
 from database import UsersDB
 
