@@ -1,7 +1,5 @@
 from telethon import events
-from config import initialize
-
-bot, gogo = initialize()
+from config import bot, owner_id
 
 from database import UsersDB, ConfigDB
 import json
