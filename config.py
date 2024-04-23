@@ -1,8 +1,6 @@
 import os
 import dotenv
-from telethon import TelegramClient
 from pymongo import MongoClient
-from API.gogoanimeapi import Gogo
 from pymongo.collection import Collection
 
 dotenv.load_dotenv(".env")
@@ -15,12 +13,26 @@ database_name = os.environ.get('DATABASE_NAME', 'Cluster0')
 owner_id = int(os.environ.get('OWNER_ID', '6883997969'))
 bot_username = os.environ.get('BOT_USERNAME', 'Io_TesterBot')
 
-bot = TelegramClient('bot', api_id, api_hash).start(bot_token=bot_token)
 client = MongoClient(db_url, tls=True)
-data = Collection(client[database_name], 'ConfigDB').find_one({"_id":"GogoAnime"})
+config_collection = Collection(client[database_name], 'ConfigDB')
 
-gogo = Gogo(
-        gogoanime_token=data["gogoanime"],
-        auth_token=data["auth"],
-        host=data["url"]
-    )
+# Check if the document exists
+existing_document = config_collection.find_one({"_id": "GogoAnime"})
+
+# If the document doesn't exist, create it with default values
+if existing_document is None:
+    default_data = {
+        "_id": "GogoAnime",
+        "gogoanime": "default_gogoanime_token",
+        "auth": "default_auth_token",
+        "url": "default_host_url"
+    }
+    config_collection.insert_one(default_data)
+
+# Retrieve the document
+data = config_collection.find_one({"_id": "GogoAnime"})
+
+# Now you can safely access the data
+gogoanime_token = data.get("gogoanime", "default_gogoanime_token")
+auth_token = data.get("auth", "default_auth_token")
+host_url = data.get("url", "default_host_url")
