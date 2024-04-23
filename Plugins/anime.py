@@ -1,8 +1,6 @@
 from telethon import events, Button
 import Helper.formating_results as format
-from config import initialize
-
-bot, gogo = initialize()
+from config import *
 from Helper.helper_functions import *
 from database import ConfigDB
 
