@@ -2,7 +2,9 @@ from Plugins.starter import Start
 from Plugins.anime import Anime
 from Plugins.manga import Manga
 from Plugins.admin import Admin
-from config import bot
+from config import initialize
+
+bot, gogo = initialize()
 import traceback
 
 start = Start()
