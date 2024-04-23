@@ -1,5 +1,5 @@
 from telethon import events
-from config import bot, owner_id
+from config import bot, owner_id, bot_username
 
 from database import UsersDB, ConfigDB
 import json
